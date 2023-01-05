@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "234770517100",
+    "project_id": "zplypush",
+    "storage_bucket": "zplypush.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:234770517100:android:1bd9c4e6c0839e6ff65c49",
+        "android_client_info": {
+          "package_name": "com.nativescreens"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "234770517100-qpj5msjl29e19efv9ftkkr1b7jc8rmfm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nativescreens",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "234770517100-jec103mlgjeobpc2np5ma8jucetlelf8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDid-8KrOTovtVcEiSvlgrlEwS2892r358"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "234770517100-jec103mlgjeobpc2np5ma8jucetlelf8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
