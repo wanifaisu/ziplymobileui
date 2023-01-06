@@ -1,3 +1,4 @@
+
 apply plugin: "com.android.application"
 apply plugin:"com.google.gms.google-services"
 project.ext.vectoricons = [
@@ -6,8 +7,8 @@ project.ext.vectoricons = [
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
-import com.android.build.OutputFile
-import org.apache.tools.ant.taskdefs.condition.Os
+// import com.android.build.OutputFile
+// import org.apache.tools.ant.taskdefs.condition.Os
 
 /**
  * The react.gradle file registers a task for each build variant (e.g. bundleDebugJsAndAssets
