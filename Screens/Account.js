@@ -13,13 +13,13 @@ import {
 import React, {useEffect, useState} from 'react';
 import {colors} from '../utils/Colors';
 import {Spaces} from '../utils/Spacing';
-import {profileData} from "../Components/Account/profileData"
+import {profileData} from '../Components/Account/profileData';
 import {Size} from '../utils/Size';
 import CustomButton from '../Components/UI/CustomButton';
 import ProfileSection from '../Components/Account/ProfileSection';
 import OnProfile from '../Components/Account/OnProfile';
 import OnBillPreferences from '../Components/Account/OnBillPreferences';
-import OnPlansAndServices from "../Components/Account/OnPlansAndServices"
+import OnPlansAndServices from '../Components/Account/OnPlansAndServices';
 import OnSettings from '../Components/Account/OnSettings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PopModal from '../Components/shared/PopModal';
@@ -44,28 +44,32 @@ const Account = ({navigation}) => {
     isAutoPay: false,
     isPaperless: false,
   });
-  
-  const [profileDetails, setProfileDetails] = useState(profileData);
-  const requestPermissions=async()=>{
-    try {
-      const granted= await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.CAMERA,{
-        title:"Ziply Mobile App request permission",
-        message:"Ziply Mobile App needs Access to your gallery"+ "So you can upload Awesome Images",
-        buttonNeutral:"Ask Me Later",
-        buttonNegative:"Cancel",
-        buttonPositive:"OK"
-      })
-      // pickImage()
-      if(granted===PermissionsAndroid.RESULTS.GRANTED){
-        editProfileImage()
 
-      }else{
-        Alert.alert("User denied permission")
+  const [profileDetails, setProfileDetails] = useState(profileData);
+  const requestPermissions = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.CAMERA,
+        {
+          title: 'Ziply Mobile App request permission',
+          message:
+            'Ziply Mobile App needs Access to your gallery' +
+            'So you can upload Awesome Images',
+          buttonNeutral: 'Ask Me Later',
+          buttonNegative: 'Cancel',
+          buttonPositive: 'OK',
+        },
+      );
+      // pickImage()
+      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+        editProfileImage();
+      } else {
+        Alert.alert('User denied permission');
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   // const pickImage= () => {
   //   let options = {
   //     title: 'Select Image',
@@ -97,23 +101,27 @@ const Account = ({navigation}) => {
   //     }
   //   });
   // }
-  
+
   const getUserData = async () => {
     try {
-      const value = await AsyncStorage.getItem("user");
+      const value = await AsyncStorage.getItem('user');
       let user = JSON.parse(value);
       if (user !== null) {
-
-        setProfileDetails({...profileDetails,userName:user.username,password:user.password,confirmPassword:user.password})
+        setProfileDetails({
+          ...profileDetails,
+          userName: user.username,
+          password: user.password,
+          confirmPassword: user.password,
+        });
       }
     } catch (error) {
-      console.log("error occured");
+      console.log('error occured');
     }
   };
 
-    useEffect(()=>{
-  getUserData()
-    },[])
+  useEffect(() => {
+    getUserData();
+  }, []);
   const signOutHandler = () => {
     navigation.navigate('LoginScreen');
   };
@@ -135,16 +143,16 @@ const Account = ({navigation}) => {
     });
     closePasswordHandler();
   };
-  const editProfileImage=()=>{
+  const editProfileImage = () => {
     ImagePicker.openPicker({
       width: 300,
       height: 400,
-      cropping: true
+      cropping: true,
     }).then(image => {
       console.log(image);
     });
-  }
-  const takePhoto=()=>{
+  };
+  const takePhoto = () => {
     ImagePicker.openCamera({
       width: 300,
       height: 400,
@@ -152,41 +160,41 @@ const Account = ({navigation}) => {
     }).then(image => {
       console.log(image);
     });
-  }
+  };
   return (
     <>
       <ScrollView
         styles={styles.accountContainer}
         showsVerticalScrollIndicator={false}>
         <View style={styles.photoContainer}></View>
-        <Pressable
-          style={styles.profileSections} onPress={changePhotoHandler}
-        >
+        <Pressable style={styles.profileSections} onPress={changePhotoHandler}>
           <Image
-            source={image?  { uri: image.fileUri }:require("../assets/profile.jpg")}
+            source={
+              image ? {uri: image.fileUri} : require('../assets/profile.jpg')
+            }
             style={styles.profilePhoto}
           />
         </Pressable>
         <View style={styles.profileDetails}>
           {changePhoto && (
-            <Pressable onPress={requestPermissions} >
+            <Pressable onPress={requestPermissions}>
               <Text style={styles.photoChange}>change Photo</Text>
             </Pressable>
           )}
           <ProfileSection />
           <OnProfile
-           profileDetails={profileDetails}
+            profileDetails={profileDetails}
             editProfile={editProfile}
             setProfileDetails={setProfileDetails}
             setEditProfile={setEditProfile}
             openPasswordHandler={openPasswordHandler}
           />
-          <OnBillPreferences 
-           profileDetails={profileDetails}
-           setProfileDetails={setProfileDetails}
-           setEditBilling={setEditBilling}
-           editBilling={editBilling}
-           />
+          <OnBillPreferences
+            profileDetails={profileDetails}
+            setProfileDetails={setProfileDetails}
+            setEditBilling={setEditBilling}
+            editBilling={editBilling}
+          />
           <OnPlansAndServices />
           <OnSettings />
           <View style={styles.buttonContainer}>
@@ -197,9 +205,12 @@ const Account = ({navigation}) => {
       {modalVisible && (
         <PopModal
           modalVisible={modalVisible}
-          closeModalHandler={closePasswordHandler}
-        >
-          <PasswordChange savePasswordHandler={savePasswordHandler} password={profileDetails?.password} confirmPassword={profileDetails?.confirmPassword}/>
+          closeModalHandler={closePasswordHandler}>
+          <PasswordChange
+            savePasswordHandler={savePasswordHandler}
+            password={profileDetails?.password}
+            confirmPassword={profileDetails?.confirmPassword}
+          />
         </PopModal>
       )}
     </>
